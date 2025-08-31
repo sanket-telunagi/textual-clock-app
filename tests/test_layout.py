@@ -1,17 +1,11 @@
 from textual.app import App, ComposeResult
-
-# from textual.containers import Container
-from textual.widgets import Header, Footer, TabbedContent, TabPane
+from textual.widgets import Header, Footer, TabbedContent, TabPane, Static
+from textual_clock.widgets.stopwatch import Stopwatch
 from textual.containers import VerticalScroll
 
-# We will create these files in the next steps
-# from widgets.clock import DigitalClock
-from widgets.stopwatch import Stopwatch
-# from widgets.timer import TimerWidget
 
-
-class TerminalClockApp(App):
-    """A terminal-based clock application."""
+class LayoutTestApp(App):
+    CSS_PATH = "test.css"
 
     BINDINGS = [
         ("d", "toggle_dark", "Toggle Dark Mode"),
@@ -20,21 +14,13 @@ class TerminalClockApp(App):
         ("r", "remove_stopwatch", "Remove"),
     ]
 
-    # Link our CSS file
-    CSS_PATH = "style.css"
-
     def compose(self) -> ComposeResult:
-        """Create child widgets for the app."""
         yield Header()
-        # with TabbedContent(initial="tab-stopwatch"):
-        #     with TabPane("Stopwatch", id="tab-stopwatch"):
-        yield VerticalScroll(
-            Stopwatch(), Stopwatch(), Stopwatch(), id="timers"
-        )  # Placeholder
-        # with TabPane("Clock", id="tab-clock"):
-        #     yield DigitalClock()  # Placeholder
-        # with TabPane("Timer", id="tab-timer"):
-        #     yield TimerWidget()  # Placeholder
+        with TabbedContent():
+            with TabPane("Tab 1"):
+                yield VerticalScroll(Stopwatch(), Stopwatch(), Stopwatch(), id="timers")
+            with TabPane("Tab 2"):
+                yield Static("This is the content for Tab 2.")
         yield Footer()
 
     def action_add_stopwatch(self) -> None:
@@ -57,5 +43,5 @@ class TerminalClockApp(App):
 
 
 if __name__ == "__main__":
-    app = TerminalClockApp()
+    app = LayoutTestApp()
     app.run()

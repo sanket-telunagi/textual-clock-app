@@ -1,0 +1,99 @@
+Screen {
+    layout: vertical;
+    background: $surface;
+    color: $text;
+}
+
+TabbedContent {
+    height: 1fr;
+    /* This is the rule we are testing */
+}
+
+TabPane {
+    align: center middle;
+}
+
+Stopwatch {
+    align: center middle;
+}
+
+TimeDisplay {
+    margin-bottom: 2;
+}
+
+Stopwatch > Horizontal {
+    width: auto;
+    height: auto;
+    margin-top: 1;
+}
+
+Stopwatch > Horizontal > Button {
+    margin: 0 2;
+}
+
+/* Hide the stop button initially */
+#stop {
+    display: none;
+}
+
+/* When stopwatch is started, show stop and hide start */
+Stopwatch.started #start {
+    display: none;
+}
+
+Stopwatch.started #stop {
+    display: block;
+}
+
+
+Stopwatch {
+    background: $boost;
+    height: 5;
+    margin: 1;
+    min-width: 50;
+    padding: 1;
+}
+
+TimeDisplay {   
+    text-align: center;
+    color: $foreground-muted;
+    height: 3;
+}
+
+Button {
+    width: 16;
+}
+
+#start {
+    dock: left;
+}
+
+#stop {
+    dock: left;
+    display: none;
+}
+
+#reset {
+    dock: right;
+}
+
+.started {
+    background: $success-muted;
+    color: $text;
+}
+
+.started TimeDisplay {
+    color: $foreground;
+}
+
+.started #start {
+    display: none
+}
+
+.started #stop {
+    display: block
+}
+
+.started #reset {
+    visibility: hidden
+}
